@@ -1,0 +1,10 @@
+body {
+  background-color: #161616;
+  margin: 0;
+}
+
+.app-wrapper {
+  margin: 0;
+  padding: 20px;
+  max-width: 100%;
+}
