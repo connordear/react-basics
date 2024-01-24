@@ -1,4 +1,4 @@
-# React Basics Library
+# React Basics
 
 This is a simple application with some basic components demonstrating some features of React.
 
