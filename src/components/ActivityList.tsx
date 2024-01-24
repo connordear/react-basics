@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { Activity, getActivitiesAsync } from "../api/activities";
+import { Activity, getActivities, getActivitiesAsync } from "../api/activities";
 import ActivityCard from "./ActivityCard";
 import "./ActivityList.css";
 import LoadingSpinner from "./extras/LoadingSpinner";
 
 function ActivityList() {
   const [searchText, setSearchText] = useState("");
+  const [activities, setActivities] = useState<Activity[]>(getActivities());
   const [filteredActivities, setFilteredActivities] = useState<Activity[]>();
 
-  const [activities, setActivities] = useState<Activity[]>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -51,9 +51,10 @@ function ActivityList() {
       />
 
       {isLoading && <LoadingSpinner />}
-      {filteredActivities?.map((activity) => (
-        <div key={activity.title} className="row">
+      {!isLoading &&
+        filteredActivities?.map((activity) => (
           <ActivityCard
+            key={activity.title}
             img={activity.image}
             title={activity.title}
             description={activity.description}
@@ -61,8 +62,7 @@ function ActivityList() {
             priceDetails={activity.priceDetails}
             link={activity.link}
           />
-        </div>
-      ))}
+        ))}
       {error && <p className="error">{error.message}</p>}
     </div>
   );
